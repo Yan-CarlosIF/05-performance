@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import SearchResults from "./components/searchResults";
 
 export default function Home() {
@@ -17,6 +17,10 @@ export default function Home() {
     console.log(data);
     setResults(data);
   }
+
+  const addToWishList = useCallback(async (id: number) => {
+    console.log(id);
+  }, []);
 
   return (
     <div className="mt-10 flex flex-col items-center justify-center">
@@ -35,7 +39,11 @@ export default function Home() {
         </button>
       </form>
 
-      <SearchResults results={results} />
+      <SearchResults results={results} onAddToWishList={addToWishList} />
     </div>
   );
 }
+
+/** Quando usar useCallback? (parecido com useMemo)
+ * 1. Quando queremos memorizar(memoizar) uma função.
+ */
